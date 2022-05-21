@@ -2,7 +2,7 @@
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="com.xmu.haruki.mapper.InformationMapper">
 
-    <insert id="insertBasicInformation" parameterType="com.xmu.haruki.po.IntMessage">
+    <insert id="insertBasicInformation" parameterType="com.xmu.haruki.information.BasicInformation">
         insert into ${property}(event_date,event_time,target,property,data)
         values(#{eventDate},#{eventTime},#{target},#{property},#{basicData});
     </insert>

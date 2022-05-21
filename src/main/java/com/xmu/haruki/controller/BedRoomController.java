@@ -3,7 +3,6 @@ package com.xmu.haruki.controller;
 import com.xmu.haruki.environment.BedRoom;
 import com.xmu.haruki.information.AirQuality;
 import com.xmu.haruki.information.BasicInformation;
-import com.xmu.haruki.po.IntMessage;
 import com.xmu.haruki.service.BedRoomService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
