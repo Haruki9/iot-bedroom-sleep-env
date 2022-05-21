@@ -39,7 +39,6 @@ public class BedRoomController {
 
     @PostMapping("basic-info")
     public void insertBasicInfo(@RequestBody BasicInformation information){
-        System.out.println(information);
         bedRoomService.insertBasicInformation(information);
     }
 
@@ -52,7 +51,6 @@ public class BedRoomController {
     public Integer temperatureUp(){
         bedRoom.init();
         Integer data=bedRoom.getInformationMap().get("temperature").getBasicData();
-        System.out.println(data);
         return data;
     }
 }

@@ -14,6 +14,7 @@ public class BedRoomConfiguration {
     public BedRoom bedRoom(){
         BedRoom bedRoom=new BedRoom();
         bedRoom.init();
+        bedRoom.startChange();
         if (enableSensor)bedRoom.startSensors();
         return bedRoom;
     }
