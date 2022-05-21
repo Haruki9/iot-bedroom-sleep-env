@@ -1,0 +1,93 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.xmu.haruki.mapper.InformationMapper">
+
+    <insert id="insertBasicInformation" parameterType="com.xmu.haruki.po.IntMessage">
+        insert into ${property}(event_date,event_time,target,property,data)
+        values(#{eventDate},#{eventTime},#{target},#{property},#{basicData});
+    </insert>
+    
+    <insert id="insertAirQuality">
+        insert into ${property}(event_date,event_time,target,property,co,pm25,pm10,o2,co2,level)
+        values(#{eventDate},#{eventTime},#{target},#{property}
+        ,#{co}
+        ,#{pm25}
+        ,#{pm10}
+        ,#{o2}
+        ,#{co2}
+        ,#{level})
+    </insert>
+    
+    
+    <select id="selectMessage" resultType="com.xmu.haruki.information.BasicInformation">
+        select * from ${property}
+        <where>
+            <if test="id!=null">
+                id=#{id}
+            </if>
+            <if test="eventDate!=null">
+                and event_date=#{eventDate}
+            </if>
+            <if test="eventTime!=null">
+                and event_time=#{eventTime}
+            </if>
+            <if test="target!=null">
+                and target=#{target}
+            </if>
+        </where>
+    </select>
+
+    <select id="selectMessageByTimeInterval" resultType="com.xmu.haruki.information.BasicInformation">
+        select * from ${property}
+        <where>
+            <if test="beginTime!=null">
+                event_date &gt;= #{beiginTime}
+            </if>
+            <if test="endTime!=null">
+                and event_time &lt;= #{endTime}
+            </if>
+            <if test="beginDate!=null">
+                and event_date &gt;= #{beginDate}
+            </if>
+            <if test="endDate!=null">
+                and event_time &lt;= #{endDate}
+            </if>
+        </where>
+    </select>
+
+    <select id="selectAirQualityMessage" resultType="com.xmu.haruki.information.AirQuality">
+        select * from air_quality
+        <where>
+            <if test="id!=null">
+                id=#{id}
+            </if>
+            <if test="eventDate!=null">
+                and event_date=#{eventDate}
+            </if>
+            <if test="eventTime!=null">
+                and event_time=#{eventTime}
+            </if>
+            <if test="target!=null">
+                and target=#{target}
+            </if>
+        </where>
+    </select>
+
+    <select id="selectAirQualityMessageByTimeInterval" resultType="com.xmu.haruki.information.AirQuality">
+        select * from air_quality
+        <where>
+            <if test="beginTime!=null">
+                event_date &gt;= #{beiginTime}
+            </if>
+            <if test="endTime!=null">
+                and event_time &lt;= #{endTime}
+            </if>
+            <if test="beginDate!=null">
+                and event_date &gt;= #{beginDate}
+            </if>
+            <if test="endDate!=null">
+                and event_time &lt;= #{endDate}
+            </if>
+        </where>
+    </select>
+</mapper>

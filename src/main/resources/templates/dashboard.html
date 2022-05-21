@@ -1,0 +1,76 @@
+<!DOCTYPE html>
+
+<html>
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width,initial-scale=1,minimum-scale=1,maximum-scale=1,user-scalable=no" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge, chrome=1" />
+    <title>睡眠环境数据看板</title>
+    <link rel="stylesheet" href="css/app.css" />
+
+</head>
+
+<body>
+<div class="header">
+    <h1 class="header-title">卧室睡眠环境质量数据指标</h1>
+</div>
+<div class="wrapper">
+    <div class="content">
+        <div class="col col-l">
+            <div class="xpanel-wrapper xpanel-wrapper-40">
+                <div class="xpanel xpanel-l-t">
+                    <div class="title">噪声</div>
+                    <div class="xpanel" id="noise"></div>
+                </div>
+            </div>
+            <div class="xpanel-wrapper xpanel-wrapper-60">
+                <div class="xpanel xpanel-l-b">
+                    <div class="title">温度&湿度</div>
+                    <div class="xpanel" id="temp-humidity"></div>
+                </div>
+            </div>
+        </div>
+        <div class="col col-c">
+            <div class="xpanel-wrapper xpanel-wrapper-75">
+                <div class="xpanel no-bg">
+
+                </div>
+            </div>
+            <div class="xpanel-wrapper xpanel-wrapper-25">
+                <div class="xpanel xpanel-c-b">
+                    <div class="title title-long"></div>
+
+                </div>
+            </div>
+        </div>
+        <div class="col col-r">
+            <div class="xpanel-wrapper xpanel-wrapper-40">
+                <div class="xpanel xpanel-r-t">
+                    <div class="title">光度</div>
+                    <div class="xpanel" id="light"></div>
+                </div>
+            </div>
+<!--            <div class="xpanel-wrapper xpanel-wrapper-30">-->
+<!--                <div class="xpanel xpanel-r-m">-->
+<!--                    <div class="title"></div>-->
+<!--                </div>-->
+<!--            </div>-->
+            <div class="xpanel-wrapper xpanel-wrapper-60">
+                <div class="xpanel xpanel-r-b" >
+                    <div class="title">Air Quality Indicator</div>
+                    <div class="xpanel" id="air-quality"></div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+</body>
+
+
+<script src="js/jquery-3.6.0.min.js"></script>
+<script src="js/echarts.js"></script>
+<script src="js/temperature-humidity.js"></script>
+<script src="js/light.js"></script>
+<script src="js/noise.js"></script>
+<script src="js/air-quality.js"></script>
+</html>
