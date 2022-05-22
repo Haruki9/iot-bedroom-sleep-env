@@ -56,3 +56,16 @@ create table if not exists air_quality(
   level varchar(3),
   primary key (id)
 );
+
+create table if not exists fitbit_sleep_data(
+    id int auto_increment not null ,
+    date Date,
+    score int,
+    hours_sleep time,
+    rem_sleep int,
+    deep_sleep int,
+    heart_rate int,
+    start_at time,
+    end_at time,
+    primary key (id)
+);

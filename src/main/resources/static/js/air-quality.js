@@ -47,7 +47,7 @@ airOption = {
             dim: 6,
             name: schema[6].text,
             type: 'category',
-            data: ['优秀', '良好', '正常', '糟糕', '恶劣']
+            data: ['优', '良', '中', '劣', '差']
         }
     ],
     visualMap: {
@@ -104,15 +104,16 @@ airOption = {
 
 function getAirQualityData(){
     $.ajax({
-        url: "/airquality",
+        url: "/bedroom/air-info",
         type: "GET",
-        param: {
-            beginDate : today
+        data: {
+            property: "air_quality",
+            date : today
         },
         success: function (airList){
             airQualityData.splice(0,airQualityData.length);
             airList.forEach((item)=>{
-                airQualityData.push([item.eventTime, item.co, item.pm25, item.pm10, item.o2, item.co2]);
+                airQualityData.push([item.eventTime, item.co, item.pm25, item.pm10, item.o2, item.co2,item.level]);
             })
             airOption.series[0].data=airQualityData;
             airCharts.setOption(airOption);

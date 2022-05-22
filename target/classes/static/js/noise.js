@@ -17,7 +17,14 @@ noiseOption={
     },
     xAxis: [
         {
-            data: timeScale
+            type: "category",
+            data: timeScale,
+            axisLine: {
+                lineStyle: {
+                    color: '#00a2e2',
+                    width: 1, // 这里是为了突出显示加上的
+                }
+            },
         },
     ],
     yAxis: [
@@ -25,6 +32,12 @@ noiseOption={
             type: 'value',
             scale: true,
             name: "Noise/ db",
+            axisLine: {
+                lineStyle: {
+                    color: '#00a2e2',
+                    width: 1, // 这里是为了突出显示加上的
+                }
+            },
         },
     ],
     series: [
@@ -52,16 +65,18 @@ noiseOption={
 };
 function getNoiseData(){
     $.ajax({
-        url: "/noise",
+        url: "/bedroom/basic-info",
         type: "GET",
-        param: {
-            beginDate : today
+        data: {
+            property: "noise",
+            date : today
         },
         success: function (noiseList){
             noiseData.splice(0,noiseData.length);
             noiseList.forEach((item)=>{
                 noiseData.push(item.data);
             })
+            noiseOption.xAxis.data=timeScale;
             noiseOption.series[0].data=noiseData;
             noiseCharts.setOption(noiseOption);
         },

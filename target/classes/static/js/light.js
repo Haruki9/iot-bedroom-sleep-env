@@ -25,7 +25,13 @@ lightOption={
     },
     xAxis: [
         {
-            data: timeScale
+            data: timeScale,
+            axisLine: {
+                lineStyle: {
+                    color: '#00a2e2',
+                    width: 1, // 这里是为了突出显示加上的
+                }
+            },
         },
     ],
     yAxis: [
@@ -49,16 +55,18 @@ lightOption={
 
 function getLightData(){
     $.ajax({
-        url: "/light",
+        url: "/bedroom/basic-info",
         type: "GET",
-        param: {
-            beginDate : today
+        data: {
+            property: "light",
+            date : today
         },
         success: function (lightList){
             lightData.splice(0,lightData.length);
             lightList.forEach((item)=>{
                 lightData.push(item.data);
             })
+            lightOption.xAxis.data=timeScale;
             lightOption.series[0].data=lightData;
             lightCharts.setOption(lightOption);
         },
@@ -73,3 +81,8 @@ setInterval(function (){
 },1000*60)
 
 getLightData();
+
+
+window.addEventListener("resize",function (){
+    lightCharts.resize();
+})

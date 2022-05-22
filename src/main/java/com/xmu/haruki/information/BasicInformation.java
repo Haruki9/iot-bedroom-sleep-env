@@ -14,7 +14,7 @@ public class BasicInformation {
     protected LocalTime eventTime;
     protected String target;
     protected String property;
-    protected Integer basicData;
+    protected Integer data;
 
     public BasicInformation(String target,String property){
         this.target=target;

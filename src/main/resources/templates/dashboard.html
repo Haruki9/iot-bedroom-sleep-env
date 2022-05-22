@@ -31,15 +31,58 @@
             </div>
         </div>
         <div class="col col-c">
-            <div class="xpanel-wrapper xpanel-wrapper-75">
+            <div class="xpanel-wrapper xpanel-wrapper-25" style="margin-left: 10%">
                 <div class="xpanel no-bg">
-
+                        <table class="data-t">
+                            <tbody><tr>
+                                <th><img src="img/icon-01.png"></th>
+                                <td>
+                                    <p><span id="score">0</span></p>
+                                    <p>睡眠分数</p>
+                                </td>
+                                <th><img src="img/icon-02.png"></th>
+                                <td>
+                                    <p><span id="heart-rate">0</span></p>
+                                    <p>平均心率</p>
+                                </td>
+                            </tr>
+                            <tr>
+                                <th><img src="img/icon-03.png"></th>
+                                <td>
+                                    <p><span id="start-at">0</span></p>
+                                    <p>入眠时间</p>
+                                </td>
+                                <th><img src="img/icon-04.png"></th>
+                                <td>
+                                    <p><span id="end-at">0</span></p>
+                                    <p>苏醒时间</p>
+                                </td>
+                            </tr>
+<!--                            <tr>-->
+<!--                                <th><img src="img/icon-05.png"></th>-->
+<!--                                <td>-->
+<!--                                    <p><span id="remTime">0</span></p>-->
+<!--                                    <p>轻度睡眠时间</p>-->
+<!--                                </td>-->
+<!--                                <th><img src="img/icon-06.png"></th>-->
+<!--                                <td>-->
+<!--                                    <p><span id="deepTime">0</span></p>-->
+<!--                                    <p>深度睡眠时间</p>-->
+<!--                                </td>-->
+<!--                            </tr>-->
+                            </tbody></table>
                 </div>
             </div>
-            <div class="xpanel-wrapper xpanel-wrapper-25">
-                <div class="xpanel xpanel-c-b">
-                    <div class="title title-long"></div>
-
+            <div class="xpanel-wrapper" style="height: 35%">
+                <div class="xpanel no-bg">
+                    <div class="title title-long">睡眠周期</div>
+                    <div id="sleep-route" class="xpanel"></div>
+                </div>
+            </div>
+            <div class="xpanel-wrapper" style="height: 40%">
+                <div class="xpanel no-bg">
+                    <div class="title title-long">每周睡眠周期</div>
+                    <div id="week-sleep-info" class="xpanel"></div>
                 </div>
             </div>
         </div>
@@ -73,4 +116,15 @@
 <script src="js/light.js"></script>
 <script src="js/noise.js"></script>
 <script src="js/air-quality.js"></script>
+<script src="js/sleepinfo.js"></script>
+<script>
+    window.addEventListener("resize",function (){
+        tempCharts.resize();
+        noiseCharts.resize();
+        airCharts.resize();
+        lightCharts.resize();
+        weekSleepCharts.resize();
+        sleepCharts.resize();
+    })
+</script>
 </html>

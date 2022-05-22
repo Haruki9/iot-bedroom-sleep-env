@@ -2,8 +2,11 @@ package com.xmu.haruki.environment;
 
 import com.xmu.haruki.information.BasicInformation;
 import com.xmu.haruki.information.AirQuality;
+import com.xmu.haruki.information.FitbitSleepInformation;
 import com.xmu.haruki.sensors.AirQualitySensor;
 import com.xmu.haruki.sensors.BasicSensor;
+import com.xmu.haruki.sensors.FitbitSensor;
+
 import java.util.Collection;
 import java.util.Random;
 import java.util.concurrent.ExecutorService;
@@ -19,9 +22,14 @@ public class BedRoom extends BasicEnvironment {
 
     public static final String TARGET="bedroom";
     private final Logger logger=Logger.getLogger(this.getClass().getName());
-    private final static Random random=new Random();
+    public final static Random random=new Random();
     private BasicInformation airQuality;
+    private FitbitSleepInformation sleepInformation;
+    private FitbitSensor fitbitSensor;
+
     private ExecutorService sensorPool= Executors.newFixedThreadPool(7);
+
+
 
     public BedRoom(){
         super.setName(this.getClass().getName());
@@ -31,12 +39,15 @@ public class BedRoom extends BasicEnvironment {
         informationMap.put("light", new BasicInformation(TARGET,LIGHT_PROPERTY));
         airQuality=new AirQuality(TARGET);
         informationMap.put("airquality", airQuality);
+        sleepInformation=new FitbitSleepInformation();
+        sleepInformation.init();
 
         sensorMap.put("temperature",new BasicSensor(informationMap.get("temperature")));
         sensorMap.put("humidity",new BasicSensor(informationMap.get("humidity")));
         sensorMap.put("noise",new BasicSensor(informationMap.get("noise")));
         sensorMap.put("light",new BasicSensor(informationMap.get("light")));
         sensorMap.put("airquality",new AirQualitySensor(informationMap.get("airquality")));
+        fitbitSensor=new FitbitSensor(sleepInformation);
     }
 
     public void startSensors(){
@@ -44,20 +55,21 @@ public class BedRoom extends BasicEnvironment {
         for (BasicSensor sensor:sensors){
             sensorPool.execute(sensor);
         }
+        sensorPool.execute(fitbitSensor);
     }
 
     public void init(){
-        informationMap.get("temperature").setBasicData(20);
-        informationMap.get("humidity").setBasicData(40);
-        informationMap.get("noise").setBasicData(50);
-        informationMap.get("light").setBasicData(15);
+        informationMap.get("temperature").setData(20);
+        informationMap.get("humidity").setData(40);
+        informationMap.get("noise").setData(50);
+        informationMap.get("light").setData(15);
         AirQuality airInformation=((AirQuality)(informationMap.get("airquality")));
         airInformation.setCo(3);
         airInformation.setCo2(30);
         airInformation.setO2(60);
         airInformation.setPm10(37);
         airInformation.setPm25(18);
-        airInformation.setLevel("优");
+        airInformation.setLevel(AirQuality.LEVELS.get(random.nextInt(5)));
     }
 
     public void startChange(){
@@ -101,8 +113,7 @@ public class BedRoom extends BasicEnvironment {
         airQuality.setCo(airQuality.getCo()-1);
         airQuality.setCo2(airQuality.getCo2()-2);
         airQuality.setO2(airQuality.getO2()+2);
-        int l=AirQuality.LEVELS.indexOf(airQuality.getLevel());
-        airQuality.setLevel(AirQuality.LEVELS.get(l>=1?l-1:l));
+        airQuality.setLevel(AirQuality.LEVELS.get(random.nextInt(5)));
     }
 
     public void airImprovement(){
@@ -112,54 +123,55 @@ public class BedRoom extends BasicEnvironment {
         airQuality.setCo(airQuality.getCo()+random.nextInt(2));
         airQuality.setCo2(airQuality.getCo2()+random.nextInt(2)*2);
         airQuality.setO2(airQuality.getO2()+random.nextInt(2)*2);
-        airQuality.setLevel(AirQuality.LEVELS.get(random.nextInt(6)));
+        int l=AirQuality.LEVELS.indexOf(airQuality.getLevel());
+        airQuality.setLevel(AirQuality.LEVELS.get(l>=1?l-1:0));
     }
 
     public void warmUp(){
-        informationMap.get("temperature").setBasicData(
-                informationMap.get("temperature").getBasicData()+2
+        informationMap.get("temperature").setData(
+                informationMap.get("temperature").getData()+2
         );
     }
 
     public void coolDown(){
-        informationMap.get("temperature").setBasicData(
-                informationMap.get("temperature").getBasicData()-2
+        informationMap.get("temperature").setData(
+                informationMap.get("temperature").getData()-2
         );
     }
 
     public void noiseMore(){
-        informationMap.get("noise").setBasicData(
-                informationMap.get("noise").getBasicData()+3
+        informationMap.get("noise").setData(
+                informationMap.get("noise").getData()+3
         );
     }
 
     public void noiseLess(){
-        informationMap.get("noise").setBasicData(
-                informationMap.get("noise").getBasicData()-3
+        informationMap.get("noise").setData(
+                informationMap.get("noise").getData()-3
         );
     }
 
     public void humidityMore(){
-        informationMap.get("humidity").setBasicData(
-                informationMap.get("humidity").getBasicData()+5
+        informationMap.get("humidity").setData(
+                informationMap.get("humidity").getData()+5
         );
     }
 
     public void humidityLess() {
-        informationMap.get("humidity").setBasicData(
-                informationMap.get("humidity").getBasicData() - 5
+        informationMap.get("humidity").setData(
+                informationMap.get("humidity").getData() - 5
         );
     }
 
     public void lightUp(){
-        informationMap.get("light").setBasicData(
-                informationMap.get("light").getBasicData()+2
+        informationMap.get("light").setData(
+                informationMap.get("light").getData()+2
         );
     }
 
     public void lightDown(){
-        informationMap.get("light").setBasicData(
-                informationMap.get("light").getBasicData()-2
+        informationMap.get("light").setData(
+                informationMap.get("light").getData()-2
         );
     }
 

@@ -9,6 +9,7 @@ import java.util.ArrayList;
 @EqualsAndHashCode(callSuper = true)
 @Data
 @AllArgsConstructor
+@NoArgsConstructor
 public class AirQuality extends BasicInformation{
     public static ArrayList<String> LEVELS=new ArrayList<>();
     static {

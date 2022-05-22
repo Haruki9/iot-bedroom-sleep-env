@@ -4,7 +4,7 @@
 
     <insert id="insertBasicInformation" parameterType="com.xmu.haruki.information.BasicInformation">
         insert into ${property}(event_date,event_time,target,property,data)
-        values(#{eventDate},#{eventTime},#{target},#{property},#{basicData});
+        values(#{eventDate},#{eventTime},#{target},#{property},#{data});
     </insert>
     
     <insert id="insertAirQuality">
@@ -16,6 +16,11 @@
         ,#{o2}
         ,#{co2}
         ,#{level})
+    </insert>
+
+    <insert id="insertSleepInformation" parameterType="com.xmu.haruki.information.FitbitSleepInformation">
+        insert into fitbit_sleep_data(date,score,hours_sleep,rem_sleep,deep_sleep,heart_rate,start_at,end_at)
+        values (#{date},#{score},#{hoursSleep},#{remSleep},#{deepSleep},#{heartRate},#{startAt},#{endAt})
     </insert>
     
     
@@ -73,6 +78,11 @@
         </where>
     </select>
 
+    <select id="selectFitBitInformationByDate" resultType="com.xmu.haruki.information.FitbitSleepInformation">
+        select * from fitbit_sleep_data
+        where date=#{date};
+    </select>
+
     <select id="selectAirQualityMessageByTimeInterval" resultType="com.xmu.haruki.information.AirQuality">
         select * from air_quality
         <where>
@@ -89,5 +99,12 @@
                 and event_time &lt;= #{endDate}
             </if>
         </where>
+    </select>
+
+
+    <select id="selectFitBitInformationByInterval"
+            resultType="com.xmu.haruki.information.FitbitSleepInformation">
+        select * from fitbit_sleep_data
+        where date &gt; #{beginDate} and date &lt;= #{endDate}
     </select>
 </mapper>

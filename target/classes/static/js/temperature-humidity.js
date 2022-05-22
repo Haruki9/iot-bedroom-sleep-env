@@ -92,10 +92,11 @@ tempOption={
 
 function getTemperatureDate(){
     $.ajax({
-        url: "/temperature",
+        url: "/bedroom/basic-info",
         type: "GET",
-        param: {
-            beginDate : today
+        data: {
+            property: "temperature",
+            date : today
         },
         success: function (temperatureList){
             timeScale.splice(0,timeScale.length)
@@ -117,10 +118,11 @@ function getTemperatureDate(){
 
 function getHumidity(){
     $.ajax({
-        url: "/humidity",
+        url: "bedroom/basic-info",
         type: "GET",
-        param: {
-            beginDate: today,
+        data: {
+            property: "humidity",
+            date : today
         },
         success: function (humidityList){
             humidityData.splice(0,humidityData.length);
