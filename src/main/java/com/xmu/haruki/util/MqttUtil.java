@@ -25,7 +25,7 @@ public class MqttUtil {
             return clientMap.get(clientId);
         }
 
-        String serverUrl="tcp://10.211.55.3:1883";
+        String serverUrl="tcp://localhost:1883";
         String username="";
         String passwd="";
 

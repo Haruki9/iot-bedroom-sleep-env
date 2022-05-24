@@ -64,11 +64,11 @@ public class BedRoom extends BasicEnvironment {
         informationMap.get("noise").setData(50);
         informationMap.get("light").setData(15);
         AirQuality airInformation=((AirQuality)(informationMap.get("airquality")));
-        airInformation.setCo(3);
-        airInformation.setCo2(30);
-        airInformation.setO2(60);
-        airInformation.setPm10(37);
-        airInformation.setPm25(18);
+        airInformation.setCo(15);
+        airInformation.setCo2(1000);
+        airInformation.setO2(23);
+        airInformation.setPm10(45);
+        airInformation.setPm25(10);
         airInformation.setLevel(AirQuality.LEVELS.get(random.nextInt(5)));
     }
 
@@ -108,11 +108,11 @@ public class BedRoom extends BasicEnvironment {
 
     public void airImprovement(){
         AirQuality airQuality= (AirQuality) informationMap.get("airquality");
-        airQuality.setPm25(airQuality.getPm25()-2);
-        airQuality.setPm10(airQuality.getPm10()-4);
-        airQuality.setCo(airQuality.getCo()-1);
-        airQuality.setCo2(airQuality.getCo2()-2);
-        airQuality.setO2(airQuality.getO2()+2);
+        if(airQuality.getCo()>=15)airQuality.setCo(airQuality.getCo()-3);
+        if(airQuality.getPm25()>=20)airQuality.setPm25(airQuality.getPm25()-2);
+        if(airQuality.getPm10()>=50)airQuality.setPm10(airQuality.getPm10()-5);
+        if(airQuality.getCo2()>=1500)airQuality.setCo2(airQuality.getCo2()-random.nextInt(50));
+        airQuality.setO2(airQuality.getO2()+1);
         airQuality.setLevel(AirQuality.LEVELS.get(random.nextInt(5)));
     }
 
@@ -121,8 +121,8 @@ public class BedRoom extends BasicEnvironment {
         airQuality.setPm25(airQuality.getPm25()+random.nextInt(2)*2);
         airQuality.setPm10(airQuality.getPm10()+random.nextInt(2)*2);
         airQuality.setCo(airQuality.getCo()+1);
-        airQuality.setCo2(airQuality.getCo2()+random.nextInt(2)*2);
-        airQuality.setO2(airQuality.getO2()-random.nextInt(2)*2);
+        airQuality.setCo2(airQuality.getCo2()+random.nextInt(2)*random.nextInt(50));
+        airQuality.setO2(airQuality.getO2()-random.nextInt(2));
         int l=AirQuality.LEVELS.indexOf(airQuality.getLevel());
         airQuality.setLevel(AirQuality.LEVELS.get(l>=1?l-1:0));
     }
