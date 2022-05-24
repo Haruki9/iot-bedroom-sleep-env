@@ -77,7 +77,7 @@ public class BedRoom extends BasicEnvironment {
             while (true){
                 try{
                     environmentChange();
-                    logger.info("change environment");
+//                    logger.info("change environment");
                     Thread.sleep(1000*30);
                 }catch (InterruptedException e){
                     logger.info(e.getMessage());
@@ -106,7 +106,7 @@ public class BedRoom extends BasicEnvironment {
         airQualityChange();
     }
 
-    public void airQualityChange(){
+    public void airImprovement(){
         AirQuality airQuality= (AirQuality) informationMap.get("airquality");
         airQuality.setPm25(airQuality.getPm25()-2);
         airQuality.setPm10(airQuality.getPm10()-4);
@@ -116,13 +116,13 @@ public class BedRoom extends BasicEnvironment {
         airQuality.setLevel(AirQuality.LEVELS.get(random.nextInt(5)));
     }
 
-    public void airImprovement(){
+    public void airQualityChange(){
         AirQuality airQuality= (AirQuality) informationMap.get("airquality");
         airQuality.setPm25(airQuality.getPm25()+random.nextInt(2)*2);
         airQuality.setPm10(airQuality.getPm10()+random.nextInt(2)*2);
-        airQuality.setCo(airQuality.getCo()+random.nextInt(2));
+        airQuality.setCo(airQuality.getCo()+1);
         airQuality.setCo2(airQuality.getCo2()+random.nextInt(2)*2);
-        airQuality.setO2(airQuality.getO2()+random.nextInt(2)*2);
+        airQuality.setO2(airQuality.getO2()-random.nextInt(2)*2);
         int l=AirQuality.LEVELS.indexOf(airQuality.getLevel());
         airQuality.setLevel(AirQuality.LEVELS.get(l>=1?l-1:0));
     }
@@ -174,6 +174,4 @@ public class BedRoom extends BasicEnvironment {
                 informationMap.get("light").getData()-2
         );
     }
-
-
 }

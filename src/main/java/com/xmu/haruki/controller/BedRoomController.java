@@ -80,6 +80,7 @@ public class BedRoomController {
         bedRoomService.insertFitBitSleepData(information);
     }
 
+    @CrossOrigin
     @GetMapping("warm-up")
     public void warmUp(){
         int times=BedRoom.random.nextInt(2)+1;
@@ -89,6 +90,7 @@ public class BedRoomController {
         }
     }
 
+    @CrossOrigin
     @GetMapping("cool-down")
     public void coolDown(){
         int times=BedRoom.random.nextInt(2)+1;
@@ -98,6 +100,7 @@ public class BedRoomController {
         }
     }
 
+    @CrossOrigin
     @GetMapping("humidity-more")
     public void humidityMore(){
         int times=BedRoom.random.nextInt(2)+1;
@@ -107,6 +110,7 @@ public class BedRoomController {
         }
     }
 
+    @CrossOrigin
     @GetMapping("humidity-less")
     public void humidityLess(){
         int times=BedRoom.random.nextInt(2)+1;
@@ -116,6 +120,7 @@ public class BedRoomController {
         }
     }
 
+    @CrossOrigin
     @GetMapping("light-down")
     public void lightDown(){
         int times=BedRoom.random.nextInt(2)+1;
@@ -124,6 +129,8 @@ public class BedRoomController {
             times--;
         }
     }
+
+    @CrossOrigin
     @GetMapping("light-up")
     public void lightUp(){
         int times=BedRoom.random.nextInt(2)+1;
@@ -133,6 +140,8 @@ public class BedRoomController {
         }
     }
 
+
+    @CrossOrigin
     @GetMapping("noise-more")
     public void noiseMore(){
         int times=BedRoom.random.nextInt(2)+1;
@@ -142,7 +151,8 @@ public class BedRoomController {
         }
     }
 
-    @GetMapping("noise-Less")
+    @CrossOrigin
+    @GetMapping("noise-less")
     public void noiseLess(){
         int times=BedRoom.random.nextInt(2)+1;
         while (times>0){
@@ -151,6 +161,7 @@ public class BedRoomController {
         }
     }
 
+    @CrossOrigin
     @GetMapping("air-improve")
     public void airImprove(){
         int times=BedRoom.random.nextInt(2)+1;
@@ -159,5 +170,4 @@ public class BedRoomController {
             times--;
         }
     }
-
 }

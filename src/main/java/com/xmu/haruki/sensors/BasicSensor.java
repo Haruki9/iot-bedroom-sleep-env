@@ -54,7 +54,7 @@ public class BasicSensor implements Runnable{
         while(true){
             try{
                 publish();
-                Thread.sleep(60/frequency*1000);
+                Thread.sleep(30/frequency*1000);
             }catch (InterruptedException e){
                 logger.info(e.getMessage());
             }
