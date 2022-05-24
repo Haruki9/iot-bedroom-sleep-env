@@ -122,7 +122,7 @@ public class BedRoom extends BasicEnvironment {
         airQuality.setPm10(airQuality.getPm10()+random.nextInt(2)*2);
         airQuality.setCo(airQuality.getCo()+1);
         airQuality.setCo2(airQuality.getCo2()+random.nextInt(2)*random.nextInt(50));
-        airQuality.setO2(airQuality.getO2()-random.nextInt(2));
+        if(airQuality.getO2()>=15)airQuality.setO2(airQuality.getO2()-random.nextInt(2));
         int l=AirQuality.LEVELS.indexOf(airQuality.getLevel());
         airQuality.setLevel(AirQuality.LEVELS.get(l>=1?l-1:0));
     }
